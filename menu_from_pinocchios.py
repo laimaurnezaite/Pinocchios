@@ -44,10 +44,10 @@ menu = {
         {"title":"Fresh Garlic","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
         {"title":"Zucchini","size":"", "unit_price":0.00, "item_category":"Free Toppings"}],
     "toppings" : [
-        {"title":"+ Mushrooms", "size":"", "unit_price":0.50, "item_category":"Subs"},
-        {"title":"+ Green Peppers", "size":"", "unit_price":0.50, "item_category":"Subs"},
-        {"title":"+ Onions", "size":"", "unit_price":0.50, "item_category":"Subs"},
-        {"title":"Extra Cheese on any sub", "size":"", "unit_price":0.50, "item_category":"Subs"},],
+        {"title":"+ Mushrooms", "size":"", "unit_price":0.50, "item_category":"Toppings"},
+        {"title":"+ Green Peppers", "size":"", "unit_price":0.50, "item_category":"Toppings"},
+        {"title":"+ Onions", "size":"", "unit_price":0.50, "item_category":"Toppings"},
+        {"title":"Extra Cheese on any sub", "size":"", "unit_price":0.50, "item_category":"Toppings"},],
     "subs" : [
         {"title":"Cheese","size":"Small", "unit_price":6.50, "item_category":"Subs"},
         {"title":"Italian","size":"Small", "unit_price":6.50, "item_category":"Subs"},
