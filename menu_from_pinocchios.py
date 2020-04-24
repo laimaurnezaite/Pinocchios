@@ -46,7 +46,8 @@ menu = {
     "toppings" : [
         {"title":"+ Mushrooms", "unit_price":0.50, "item_category":"Subs"},
         {"title":"+ Green Peppers", "unit_price":0.50, "item_category":"Subs"},
-        {"title":"+ Onions","unit_price":0.50, "item_category":"Subs"}],
+        {"title":"+ Onions","unit_price":0.50, "item_category":"Subs"},
+        {"title":"Extra Cheese on any sub", "unit_price":0.50, "item_category":"Subs"},],
     "subs" : [
         {"title":"Cheese","size":"Small", "unit_price":6.50, "item_category":"Subs"},
         {"title":"Italian","size":"Small", "unit_price":6.50, "item_category":"Subs"},
@@ -62,22 +63,20 @@ menu = {
         {"title":"Cheeseburger","size":"Small", "unit_price":5.10, "item_category":"Subs"},
         {"title":"Fried Chicken","size":"Small", "unit_price":6.95, "item_category":"Subs"},
         {"title":"Veggie","size":"Small", "unit_price":6.95, "item_category":"Subs"},
-        {"title":"Extra Cheese on any sub","size":"Small", "unit_price":0.50, "item_category":"Subs"},
-        {"title":"Cheese","size":"Small", "unit_price":7.95, "item_category":"Subs"},
-        {"title":"Italian","size":"Small", "unit_price":7.95, "item_category":"Subs"},
-        {"title":"Ham + Cheese","size":"Small", "unit_price":7.95, "item_category":"Subs"},
-        {"title":"Meatball","size":"Small", "unit_price":7.95, "item_category":"Subs"},
-        {"title":"Tuna","size":"Small", "unit_price":7.95, "item_category":"Subs"},
-        {"title":"Turkey","size":"Small", "unit_price":8.50, "item_category":"Subs"},
-        {"title":"Chicken Parmigiana","size":"Small", "unit_price":8.50, "item_category":"Subs"},
-        {"title":"Eggplant Parmigiana","size":"Small", "unit_price":7.95, "item_category":"Subs"},
-        {"title":"Steak","size":"Small", "unit_price":7.95, "item_category":"Subs"},
-        {"title":"Steak + Cheese","size":"Small", "unit_price":8.50, "item_category":"Subs"},
-        {"title":"Hamburger","size":"Small", "unit_price":6.95, "item_category":"Subs"},
-        {"title":"Cheeseburger","size":"Small", "unit_price":7.45, "item_category":"Subs"},
-        {"title":"Fried Chicken","size":"Small", "unit_price":8.50, "item_category":"Subs"},
-        {"title":"Veggie","size":"Small", "unit_price":8.50, "item_category":"Subs"},
-        {"title":"Extra Cheese on any sub","size":"Small", "unit_price":0.50, "item_category":"Subs"}],
+        {"title":"Cheese","size":"Large", "unit_price":7.95, "item_category":"Subs"},
+        {"title":"Italian","size":"Large", "unit_price":7.95, "item_category":"Subs"},
+        {"title":"Ham + Cheese","size":"Large", "unit_price":7.95, "item_category":"Subs"},
+        {"title":"Meatball","size":"Large", "unit_price":7.95, "item_category":"Subs"},
+        {"title":"Tuna","size":"Large", "unit_price":7.95, "item_category":"Subs"},
+        {"title":"Turkey","size":"Large", "unit_price":8.50, "item_category":"Subs"},
+        {"title":"Chicken Parmigiana","size":"Large", "unit_price":8.50, "item_category":"Subs"},
+        {"title":"Eggplant Parmigiana","size":"Large", "unit_price":7.95, "item_category":"Subs"},
+        {"title":"Steak","size":"Large", "unit_price":7.95, "item_category":"Subs"},
+        {"title":"Steak + Cheese","size":"Large", "unit_price":8.50, "item_category":"Subs"},
+        {"title":"Hamburger","size":"Large", "unit_price":6.95, "item_category":"Subs"},
+        {"title":"Cheeseburger","size":"Large", "unit_price":7.45, "item_category":"Subs"},
+        {"title":"Fried Chicken","size":"Large", "unit_price":8.50, "item_category":"Subs"},
+        {"title":"Veggie","size":"Large", "unit_price":8.50, "item_category":"Subs"}],
     "pasta" : [
         {"title":"Baked Ziti w/Mozzarella","size":"", "unit_price":6.50, "item_category":"Pasta"},
         {"title":"Baked Ziti w/Meatballs","size":"", "unit_price":8.75, "item_category":"Pasta"},
@@ -110,7 +109,7 @@ for category in menu:
             db.execute("INSERT INTO menu_freetoppings (title, item_category) VALUES (:title, :item_category);", 
             {"title":menu[category][item]['title'], "item_category":menu[category][item]['item_category']})
             db.commit()
-        if category == "toppings":
+        elif category == "toppings":
             db.execute("INSERT INTO menu_toppings (title, unit_price, item_category) VALUES (:title, :unit_price, :item_category);", 
             {"title":menu[category][item]['title'], "unit_price":menu[category][item]['unit_price'], "item_category":menu[category][item]['item_category']})
             db.commit()
@@ -118,5 +117,3 @@ for category in menu:
             db.execute("INSERT INTO menu_maindish (title, size, unit_price, item_category) VALUES (:title, :size, :unit_price, :item_category);", 
             {"title":menu[category][item]['title'], "size":menu[category][item]['size'], "unit_price":menu[category][item]['unit_price'], "item_category":menu[category][item]['item_category']})
             db.commit()
-
-
