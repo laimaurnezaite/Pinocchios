@@ -105,15 +105,6 @@ db = sqlite3.connect("db.sqlite3")
 
 for category in menu:
     for item in range(len(menu[category])):
-        if category == "free toppings":
-            db.execute("INSERT INTO menu_freetoppings (title, item_category) VALUES (:title, :item_category);", 
+            db.execute("INSERT INTO menu_product (title, item_category) VALUES (:title, :item_category);", 
             {"title":menu[category][item]['title'], "item_category":menu[category][item]['item_category']})
-            db.commit()
-        elif category == "toppings":
-            db.execute("INSERT INTO menu_toppings (title, unit_price, item_category) VALUES (:title, :unit_price, :item_category);", 
-            {"title":menu[category][item]['title'], "unit_price":menu[category][item]['unit_price'], "item_category":menu[category][item]['item_category']})
-            db.commit()
-        else:
-            db.execute("INSERT INTO menu_maindish (title, size, unit_price, item_category) VALUES (:title, :size, :unit_price, :item_category);", 
-            {"title":menu[category][item]['title'], "size":menu[category][item]['size'], "unit_price":menu[category][item]['unit_price'], "item_category":menu[category][item]['item_category']})
             db.commit()
