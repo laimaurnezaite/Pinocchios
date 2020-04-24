@@ -44,10 +44,10 @@ menu = {
         {"title":"Fresh Garlic","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
         {"title":"Zucchini","size":"", "unit_price":0.00, "item_category":"Free Toppings"}],
     "toppings" : [
-        {"title":"+ Mushrooms", "unit_price":0.50, "item_category":"Subs"},
-        {"title":"+ Green Peppers", "unit_price":0.50, "item_category":"Subs"},
-        {"title":"+ Onions","unit_price":0.50, "item_category":"Subs"},
-        {"title":"Extra Cheese on any sub", "unit_price":0.50, "item_category":"Subs"},],
+        {"title":"+ Mushrooms", "size":"", "unit_price":0.50, "item_category":"Subs"},
+        {"title":"+ Green Peppers", "size":"", "unit_price":0.50, "item_category":"Subs"},
+        {"title":"+ Onions", "size":"", "unit_price":0.50, "item_category":"Subs"},
+        {"title":"Extra Cheese on any sub", "size":"", "unit_price":0.50, "item_category":"Subs"},],
     "subs" : [
         {"title":"Cheese","size":"Small", "unit_price":6.50, "item_category":"Subs"},
         {"title":"Italian","size":"Small", "unit_price":6.50, "item_category":"Subs"},
@@ -105,6 +105,6 @@ db = sqlite3.connect("db.sqlite3")
 
 for category in menu:
     for item in range(len(menu[category])):
-            db.execute("INSERT INTO menu_product (title, item_category) VALUES (:title, :item_category);", 
-            {"title":menu[category][item]['title'], "item_category":menu[category][item]['item_category']})
+            db.execute("INSERT INTO menu_product (title, size, unit_price, item_category) VALUES (:title, :size, :unit_price, :item_category);",
+            {"title":menu[category][item]['title'], "size":menu[category][item]['size'], "unit_price":menu[category][item]['unit_price'], "item_category":menu[category][item]['item_category']})
             db.commit()
