@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView
 
 from .models import Product
 
+
 # Create your views here.
 
 class MenuListView(ListView):

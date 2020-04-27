@@ -8,8 +8,10 @@
     <p>{{ object.item_category }}</p>
 </div>
 <div>
-    <form action="" method="POST">
+    <form action="/orders/add/" method="POST">
         {% csrf_token %}
+        {{ form.as_p}}
+        <input type="number" min="0">
         <input type="submit" value="Add to order">
     </form>
 </div>
