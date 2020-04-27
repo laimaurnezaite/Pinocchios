@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <h2>{{ object.title }}</h2>
+    <p>{{ object.size }}</p>
+    <p>{{ object.unit_price }}</p>
+    <p>{{ object.item_category }}</p>
+</div>
+<div>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Add to order">
+    </form>
+</div>
+{% endblock content %}

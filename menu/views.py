@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from .models import Product
 
@@ -8,3 +8,7 @@ from .models import Product
 class MenuListView(ListView):
     model = Product
     template_name = 'main_list.html'
+
+class MenuItemDetailView(DetailView):
+    model = Product
+    template_name = 'menu_item_detail.html'
