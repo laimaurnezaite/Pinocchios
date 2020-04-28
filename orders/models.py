@@ -13,7 +13,7 @@ class Order (models.Model):
     quantity = models.IntegerField()
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
     def get_absolute_url(self):
         return reverse('order_detail', args=[str(self.id)])
