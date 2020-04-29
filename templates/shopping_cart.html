@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    {% for data in customer %}
+        <p>Customer id: {{data.id}} </p>
+        <p>Customer username: {{data.username}} </p>
+        <p>Customer email: {{data.email}} </p>
+        <p>Order ID: {{order.id}}</p>
+    {% endfor %}
+
+
+        {% for product in product %}
+            <table style="border:solid 1px black">
+                <tr>
+                    <th>Product category</th>
+                    <th>Product</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Sum</th>
+                    <th>Date</th>
+                    <th>Confirmed</th>
+                </tr>
+                {% for order in order%}
+                    <tr>
+                        <td>{{product.item_category}}</td>
+                        <td>{{product.title}}</td>
+                        <td>{{product.size}}</td>
+                        <td>{{product.unit_price}}</td>
+                        <td>{{order.items.quantity}}</td>
+                        <td>{{order.sum}}</td>
+                        <td>{{order.date}}</td>
+                        {% if order.confirmed == False %}
+                            <td>No</td>
+                        {% else %}
+                            <td>Yes</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+            
+        <form action=" {% url 'confirm' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" id="order_id" name="order_id" value="{{ order.id }}">
+            <input type="submit" value="Confirm order"> 
+        </form>
+    {% endfor %}
+        
+</div>
+{% endblock content %}
