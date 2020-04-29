@@ -9,6 +9,10 @@
         {% if user.is_authenticated %}
             Hi {{ user.username }}!
             <p><a href="{% url 'logout' %}">Log Out</a></p> 
+            <p><a href="{% url 'confirmed_orders' %}">Confirmed Orders</a></p>
+            <p><a href="{% url 'add_to_cart' %}">Shopping cart</a></p> 
+            <p><a href="{% url 'main_list' %}">Menu</a></p> 
+
         {% else %}
             <p>You are not logged in</p>
             <a href="{% url 'login' %}">Log In</a> | <a href="{% url 'signup' %}">Sign Up</a>
