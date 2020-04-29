@@ -1,0 +1,9 @@
+orders/migrations/__pycache__/
+
+orders/__pycache__/
+
+orders/__pycache__/admin.
+orders/__pycache__/models
+orders/__pycache__/urls
+orders/__pycache__/views
+pizza/__pycache__/settings
