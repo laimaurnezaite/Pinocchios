@@ -1,9 +1,9 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, DetailView
 
 from django.contrib.auth import get_user_model
-from .models import Order
+from .models import Order#, ShoppingCart
 from menu.models import Product
 from users.models import CustomUser
 
@@ -12,61 +12,72 @@ def index(request):
     return HttpResponse("Project 3: TODO")
 
 class OrderDetail(ListView):
-    model = Order 
+    model = Order
     template_name = 'order_detail.html'
-
-
     
-def AddToOrder(request):
+def shopping_cart(request):
+    customer_id = int(request.user.id)
+    customer = CustomUser.objects.filter(id=customer_id)
     if request.method == "POST":
         quantity = float(request.POST.get('quantity'))
         product_id = int(request.POST.get('product'))
-        customer_id = int(request.user.id)
-
         product = Product.objects.filter(id=product_id)
         for data in product:
             sum = round(quantity * data.unit_price, 2)
 
-        customer = CustomUser.objects.filter(id=customer_id)
+        new_order = Order()
+        new_order.items = {
+            "product_id":request.POST.get('product'),
+            "quantity":quantity}
+        new_order.customer_id = customer_id
+        new_order.sum = sum
+        new_order.save()
         context = {
-            'quantity': quantity,
+            'order':new_order,
             'customer':customer,
             'product' : product,
-            'sum': sum,
         }
-        return render(request, 'order_detail.html', context)
-        # return HttpResponse("Project 3: TODO")
-    # else:
-    #     return HttpResponse("Project 3: ")
-        # if request.POST.get('quantity'):
-        #     print("TEST TEST TEST")
-        #     quantity = request.POST.get('quantity')
-        #     customer_id = request.user.id
-        #     title=request.POST.get(object.title)
-        #     print(title)
-        #     product_id = request.POST.get(object.title)
-        #     order = Order(customer_id = customer_id, product_id=product_id)
-        #     # order.customer_id = request.user
-            
-        #     # print(current_user)
-        #     # order = Order()
-        #     order.quantity = int(request.POST.get('quantity'))
-        #     order.save()
-        #     return HttpResponse("Project 3: TODO")
-        # else:
-        #     return render(request, 'order_detail.html')
+        return render(request, 'shopping_cart.html', context)
+    else:
+        open_orders = Order.objects.filter(customer_id=customer_id, confirmed = False)
+        print("-------")
+        for order in open_orders:
+            print(order.date)
+        # print(open_orders)
+        for data in open_orders:
+            product = Product.objects.filter(id=data.items['product_id'])
+        context = {
+            'customer':customer,
+            'order':open_orders,
+            'product':product,
+        }
+    return render(request, 'shopping_cart.html', context)
 
 def confirmOrder(request):
 
     if request.POST:
-        confirmed_order = Order()
-        confirmed_order.product_id = request.POST.get('product')
-        confirmed_order.quantity = int(float(request.POST.get('quantity')))
-        # quantity = int(float(request.POST.get('quantity')))
-        # quantity2=int(quantity)
-        # print("aaaaaaaaaasaaaaaaaaaa")
-        # print(type(quantity))
-        confirmed_order.customer_id = request.POST.get('customer')
-        confirmed_order.save()
-        return HttpResponse("Order confirmed!")
 
+        order_id = request.POST.get('order_id')
+        order_to_confirm = Order.objects.get(id=order_id)
+        order_to_confirm.confirmed = True
+        order_to_confirm.save()
+
+    return redirect ('/')
+
+def confirmed_orders(request):
+    customer_id = int(request.user.id)
+    customer = CustomUser.objects.filter(id=4)    
+    orders = Order.objects.filter(customer_id=customer_id, confirmed = True)
+    print(orders) 
+    customer = CustomUser.objects.filter(id=customer_id)
+    product = ''
+    for data in orders:
+            product = Product.objects.filter(id=data.items['product_id'])
+    print("CUSTOMER")
+    # print(orders.items)
+    context = {
+            'customer':customer,
+            'order':orders,
+            'product':product
+        }
+    return render(request, 'confirmed.html', context)
