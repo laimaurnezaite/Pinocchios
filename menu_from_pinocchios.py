@@ -23,31 +23,6 @@ menu = {
         {"title":"2 items","size":"Large", "unit_price":42.70, "item_category":"Sicilian Pizza"},
         {"title":"3 items","size":"Large", "unit_price":44.70, "item_category":"Sicilian Pizza"},
         {"title":"Special","size":"Large", "unit_price":45.70, "item_category":"Sicilian Pizza"}],
-    "free toppings" : [
-        {"title":"Pepperoni","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
-        {"title":"Sausage","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
-        {"title":"Mushrooms","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
-        {"title":"Onions","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
-        {"title":"Ham","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
-        {"title":"Canadian Bacon","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
-        {"title":"Pineapple","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
-        {"title":"Eggplant","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
-        {"title":"Tomato & Basil","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
-        {"title":"Green Peppers","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
-        {"title":"Hamburger","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
-        {"title":"Spinach","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
-        {"title":"Artichoke","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
-        {"title":"Buffalo Chicken","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
-        {"title":"Barbecue Chicken","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
-        {"title":"Anchovies","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
-        {"title":"Black Olives","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
-        {"title":"Fresh Garlic","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
-        {"title":"Zucchini","size":"", "unit_price":0.00, "item_category":"Free Toppings"}],
-    "toppings" : [
-        {"title":"+ Mushrooms", "size":"", "unit_price":0.50, "item_category":"Toppings"},
-        {"title":"+ Green Peppers", "size":"", "unit_price":0.50, "item_category":"Toppings"},
-        {"title":"+ Onions", "size":"", "unit_price":0.50, "item_category":"Toppings"},
-        {"title":"Extra Cheese on any sub", "size":"", "unit_price":0.50, "item_category":"Toppings"},],
     "subs" : [
         {"title":"Cheese","size":"Small", "unit_price":6.50, "item_category":"Subs"},
         {"title":"Italian","size":"Small", "unit_price":6.50, "item_category":"Subs"},
@@ -101,10 +76,38 @@ menu = {
         {"title":"Chicken Parm","size":"Large", "unit_price":85.00, "item_category":"Dinner Platters"}]
 }
 
+toppings = {
+    "free toppings" : [
+        {"title":"Pepperoni","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
+        {"title":"Sausage","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
+        {"title":"Mushrooms","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
+        {"title":"Onions","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
+        {"title":"Ham","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
+        {"title":"Canadian Bacon","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
+        {"title":"Pineapple","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
+        {"title":"Eggplant","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
+        {"title":"Tomato & Basil","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
+        {"title":"Green Peppers","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
+        {"title":"Hamburger","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
+        {"title":"Spinach","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
+        {"title":"Artichoke","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
+        {"title":"Buffalo Chicken","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
+        {"title":"Barbecue Chicken","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
+        {"title":"Anchovies","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
+        {"title":"Black Olives","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
+        {"title":"Fresh Garlic","size":"", "unit_price":0.00, "item_category":"Free Toppings"},
+        {"title":"Zucchini","size":"", "unit_price":0.00, "item_category":"Free Toppings"}],
+    "toppings" : [
+        {"title":"+ Mushrooms", "size":"", "unit_price":0.50, "item_category":"Toppings"},
+        {"title":"+ Green Peppers", "size":"", "unit_price":0.50, "item_category":"Toppings"},
+        {"title":"+ Onions", "size":"", "unit_price":0.50, "item_category":"Toppings"},
+        {"title":"Extra Cheese on any sub", "size":"", "unit_price":0.50, "item_category":"Toppings"}],
+}
+
 db = sqlite3.connect("db.sqlite3")
 
-for category in menu:
-    for item in range(len(menu[category])):
-            db.execute("INSERT INTO menu_product (title, size, unit_price, item_category) VALUES (:title, :size, :unit_price, :item_category);",
-            {"title":menu[category][item]['title'], "size":menu[category][item]['size'], "unit_price":menu[category][item]['unit_price'], "item_category":menu[category][item]['item_category']})
+for category in toppings:
+    for item in range(len(toppings[category])):
+            db.execute("INSERT INTO menu_toppings (title, unit_price, item_category) VALUES (:title, :unit_price, :item_category);",
+            {"title":toppings[category][item]['title'], "unit_price":toppings[category][item]['unit_price'], "item_category":toppings[category][item]['item_category']})
             db.commit()
