@@ -3,10 +3,20 @@
 {% block title %}Menu{% endblock title %}
 
 {% block content %}
-    <ol>
-        {% for fooditem in object_list %}
-        <li><a href="{% url 'item_detail' fooditem.pk %}">{{ fooditem.title }} | {{ fooditem.size }} | {{ fooditem.unit_price }} | {{ fooditem.item_category }}</a></li>
+    {% for category in menu_categories %}
+        <table style="border: 1px black solid;">
+            <tr>
+                <th>{{category}}</th>
+            </tr>
+            {% for item in menu_items %}
+                {% if item.item_category == category %}
+                <tr>
+                    <td><a href="{% url 'item_detail' item.pk %}">{{item}} </a>  | {{item.size}} | {{item.unit_price}}</td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+        <br>
     {% endfor %}
-    </ol>
-    
+        
 {% endblock content %}
