@@ -10,34 +10,47 @@
         <td>Order date: {{order.date}}</td>
     {% endfor %}
 
-
-        {% for product in product %}
-            <table style="border:solid 1px black">
-                <tr>
-                    <th>Product category</th>
-                    <th>Product</th>
-                    <th>Size</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Sum</th>
-                </tr>
-                    <tr>
-                        <td>{{product.item_category}}</td>
-                        <td>{{product.title}}</td>
-                        <td>{{product.size}}</td>
-                        <td>{{product.unit_price}}</td>
-                        <td>{{order.items.quantity}}</td>
-                        <td>{{order.sum}}</td>
-
-                    </tr>
-            </table>
-            
+    <table style="border:solid 1px black">
+        <tr>
+            <th>Product ID</th>
+            <th>Product</th>
+            <th>Product category</th>
+            <th>Size</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            <th>Sum</th>
+        </tr>
+        {% for item in order.items %}
+            <tr>
+                <td>{{item.product_id}} </td>
+                <td>{{item.product_title}}</td>
+                <td>{{item.category}}</td>
+                <td>{{item.size}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.sum}}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>Total</th>
+            <td>{{order.total}}</td>
+        </tr>
+    </table>
+    
         <form action=" {% url 'confirm' %}" method="POST">
             {% csrf_token %}
             <input type="hidden" id="order_id" name="order_id" value="{{ order.id }}">
             <input type="submit" value="Confirm order"> 
         </form>
-    {% endfor %}
         
 </div>
 {% endblock content %}

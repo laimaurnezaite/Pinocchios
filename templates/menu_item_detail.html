@@ -14,7 +14,7 @@
         {{ form.as_p}}
         <input type="hidden" id="product" name="product" value="{{ object.id }}">
         <label for="quantity">Quantity</label>
-        <input type="number" id="quantity" name="quantity" min="0"><br>
+        <input type="number" id="quantity" name="quantity" min="0" required><br>
         <input type="submit" value="Add to order">
     </form>
 </div>

@@ -7,39 +7,51 @@
     <p>Customer email: {{data.email}} </p>
     {% endfor %}
 
-    
-    {% for product in product %}
+    {% for order in order %}
         <table style="border:solid 1px black">
             <tr>
-                <th>Product category</th>
+                <th>Date</th>
+                <th>Order ID</th>
                 <th>Product</th>
+                <th>Product category</th>
                 <th>Size</th>
-                <th>Price</th>
+                <th>Unit Price</th>
                 <th>Quantity</th>
                 <th>Sum</th>
-                <th>Date</th>
                 <th>Confirmed</th>
             </tr>
-            {% for order in order %}
+            <tr>
+                <td>{{order.date}}</td>
+                <td>{{order.id}}</td>
+            </tr>
+            {% for items in order.items %}
                 <tr>
-                    <td>{{product.item_category}}</td>
-                    <td>{{product.title}}</td>
-                    <td>{{product.size}}</td>
-                    <td>{{product.unit_price}}</td>
-                    <td>{{order.items.quantity}}</td>
-                    <td>{{order.sum}}</td>
-                    <td>{{order.date}}</td>
-                    {% if order.confirmed == False %}
-                        <td>No</td>
-                    {% else %}
-                        <td>Yes</td>
-                    {% endif %}
+                    <td></td>
+                    <td></td>
+                    <td>{{items.product_title}}</td>
+                    <td>{{items.category}}</td>
+                    <td>{{items.size}}</td>
+                    <td>{{items.price}}</td>
+                    <td>{{items.quantity}}</td>
+                    <td>{{items.sum}}</td>
+                    <td>Yes</td>
                 </tr>
-                {% endfor %}
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <th>TOTAL</th>
+                <th>{{order.total}}</th>
+            </tr>
         </table>
+        <br>
+    {% endfor %}
         
-
-        {% endfor %}
+        
         
     
 {% endblock content %}
