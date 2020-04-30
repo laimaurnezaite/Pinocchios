@@ -10,7 +10,7 @@
             Hi {{ user.username }}!
             <p><a href="{% url 'logout' %}">Log Out</a></p> 
             <p><a href="{% url 'confirmed_orders' %}">Confirmed Orders</a></p>
-            <p><a href="{% url 'add_to_cart' %}">Shopping cart</a></p> 
+            <p><a href="{% url 'shopping_cart' %}">Shopping cart</a></p> 
             <p><a href="{% url 'main_list' %}">Menu</a></p> 
 
         {% else %}
