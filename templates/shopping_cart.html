@@ -7,6 +7,7 @@
         <p>Customer username: {{data.username}} </p>
         <p>Customer email: {{data.email}} </p>
         <p>Order ID: {{order.id}}</p>
+        <td>Order date: {{order.date}}</td>
     {% endfor %}
 
 
@@ -19,10 +20,7 @@
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Sum</th>
-                    <th>Date</th>
-                    <th>Confirmed</th>
                 </tr>
-                {% for order in order%}
                     <tr>
                         <td>{{product.item_category}}</td>
                         <td>{{product.title}}</td>
@@ -30,14 +28,8 @@
                         <td>{{product.unit_price}}</td>
                         <td>{{order.items.quantity}}</td>
                         <td>{{order.sum}}</td>
-                        <td>{{order.date}}</td>
-                        {% if order.confirmed == False %}
-                            <td>No</td>
-                        {% else %}
-                            <td>Yes</td>
-                        {% endif %}
+
                     </tr>
-                {% endfor %}
             </table>
             
         <form action=" {% url 'confirm' %}" method="POST">

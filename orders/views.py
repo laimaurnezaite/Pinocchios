@@ -14,14 +14,69 @@ def index(request):
 class OrderDetail(ListView):
     model = Order
     template_name = 'order_detail.html'
+
+
+
+def add(request):
+    # get information from POST request about customer and retrieve information about customer from database
+    customer_id = int(request.user.id)
+    customer = CustomUser.objects.filter(id=customer_id)
+
+    # get product ID and quantity from POST request, get product object from database 
+    quantity = float(request.POST.get('quantity'))
+    product_id = int(request.POST.get('product'))
+    product = Product.objects.filter(id=product_id)
+
+    # count the price of product
+    for price in product:
+            sum = round(quantity * price.unit_price, 2)
+            print("TYPE OF SUm OF ORDERING ITEM",type(sum))
+    # try to reach currently open orders and append it, if not - create new one
+    try:
+        open_order = Order.objects.get(customer_id=customer_id, confirmed = False)
+        if request.method == "POST":
+            open_order.items.append({"product_id":request.POST.get('product'), "quantity":quantity})
+            open_order.sum = round(open_order.sum + sum, 2)
+            open_order.save() 
+            
+            context = {
+                'order':open_order,
+                'customer':customer,
+                'product' : product,
+                }
+            return render(request, 'shopping_cart.html', context)           
+    except:
+        if request.method == "POST":
+            new_order = Order()
+            new_order.items = [{
+                "product_id":request.POST.get('product'),
+                "quantity":quantity}]
+            new_order.customer_id = customer_id
+            new_order.sum = sum
+            new_order.save()
+        
+            context = {
+                'order':new_order,
+                'customer':customer,
+                'product' : product,
+            }
+            return render(request, 'shopping_cart.html', context)
+
     
 def shopping_cart(request):
     customer_id = int(request.user.id)
     customer = CustomUser.objects.filter(id=customer_id)
+    open_order = Order.objects.filter(customer_id=customer_id, confirmed = False)
+    product_id = int(request.POST.get('product'))
+    product = Product.objects.filter(id=product_id)
+
+    if open_order != None:
+        print("NONE")
+
     if request.method == "POST":
+    
         quantity = float(request.POST.get('quantity'))
-        product_id = int(request.POST.get('product'))
-        product = Product.objects.filter(id=product_id)
+        
         for data in product:
             sum = round(quantity * data.unit_price, 2)
 
@@ -32,6 +87,8 @@ def shopping_cart(request):
         new_order.customer_id = customer_id
         new_order.sum = sum
         new_order.save()
+        
+        
         context = {
             'order':new_order,
             'customer':customer,
@@ -43,7 +100,6 @@ def shopping_cart(request):
         print("-------")
         for order in open_orders:
             print(order.date)
-        # print(open_orders)
         for data in open_orders:
             product = Product.objects.filter(id=data.items['product_id'])
         context = {
