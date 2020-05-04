@@ -1,1 +1,2 @@
 Django==2.0.3
+django-jsonfield 1.4.0
