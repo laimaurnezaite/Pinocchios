@@ -1,12 +1,1 @@
-orders/migrations/__pycache__/
-
-orders/__pycache__/
-
-orders/__pycache__/admin.
-orders/__pycache__/models
-orders/__pycache__/urls
-orders/__pycache__/views
-pizza/__pycache__/settings
-orders/__pycache__/models.cpython-38.pyc
-orders/__pycache__/urls.cpython-38.pyc
-orders/__pycache__/views.cpython-38.pyc
+**/__pycache__/
