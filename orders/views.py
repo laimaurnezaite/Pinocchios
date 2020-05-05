@@ -4,7 +4,7 @@ from django.views.generic import ListView, CreateView, DetailView
 
 from django.contrib.auth import get_user_model
 from .models import Order#, ShoppingCart
-from menu.models import Product
+from menu.models import Product, Toppings
 from users.models import CustomUser
 
 # helper functions
@@ -34,19 +34,28 @@ def add(request):
     # get information from POST request about customer and retrieve information about customer from database
     customer = get_customer_object(request)
     customer_id = get_customer_id(request)
-    
-    # get product ID and quantity from POST request, get product object from database 
+
+    # get product ID, quantity and toppings from POST request, get product object from database 
     quantity = float(request.POST.get('quantity'))
     product_id = int(request.POST.get('product'))
     product = Product.objects.get(id=product_id)
-
-    # count the price of product
     sum = round(quantity * product.unit_price, 2)
-            
+    toppings_ids = request.POST.getlist('toppings')
+    list_of_toppings = []
+
+    if toppings_ids == None:
+        topping = ''
+        sum = round(quantity * product.unit_price, 2)
+    else: 
+        for topping_id in toppings_ids:
+            topping = Toppings.objects.get(id=topping_id)
+            list_of_toppings.append(topping.title)
+            sum = round(quantity * product.unit_price, 2) + round(quantity * topping.unit_price, 2)
+
     # try to reach currently open orders and append it, if not - create new one
     try:
         open_order = get_order(customer_id, False)
-        
+
         if request.method == "POST":
             open_order.items.append({
                 "product_id":product_id,
@@ -55,14 +64,16 @@ def add(request):
                 "price": product.unit_price,
                 "sum": sum,
                 "category": product.item_category, 
-                "size":product.size})
+                "size":product.size,
+                'toppings':list_of_toppings})
             open_order.total = round(open_order.total + sum, 2)
             open_order.save() 
-            
+
             context = {
                 'order':open_order,
                 'customer':customer,
                 }
+            
             return render(request, 'shopping_cart.html', context)           
     except:
         if request.method == "POST":
@@ -74,7 +85,8 @@ def add(request):
                 "price": product.unit_price,
                 "sum": sum,
                 "category": product.item_category, 
-                "size":product.size}]
+                "size":product.size,
+                'toppings':list_of_toppings}]
             new_order.customer_id = customer_id
             new_order.total = sum
             new_order.save()
@@ -92,7 +104,7 @@ def shopping_cart(request):
     customer = get_customer_object(request)
     try:
         open_order = get_order(customer_id, False)
-        # open_order = Order.objects.get(customer_id=customer_id, confirmed = False)
+
         context = {
                 'order':open_order,
                 'customer':customer,
