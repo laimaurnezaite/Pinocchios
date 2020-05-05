@@ -18,6 +18,7 @@
             <th>Size</th>
             <th>Unit Price</th>
             <th>Quantity</th>
+            <th>Toppings</th>
             <th>Sum</th>
         </tr>
         {% for item in order.items %}
@@ -28,6 +29,7 @@
                 <td>{{item.size}}</td>
                 <td>{{item.price}}</td>
                 <td>{{item.quantity}}</td>
+                <td>{{item.toppings}}</td>
                 <td>{{item.sum}}</td>
             </tr>
         {% endfor %}
@@ -53,4 +55,5 @@
         </form>
         
 </div>
+
 {% endblock content %}
