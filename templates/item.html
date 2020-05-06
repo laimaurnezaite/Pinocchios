@@ -2,11 +2,24 @@
 
 {% block content %}
 <div>
-    <h2>{{ product.title }}</h2>
-    <p>{{ product.size }}</p>
-    <p>{{ product.unit_price }}</p>
-    <p>{{ product.item_category }}</p>
-    <p>{{ product.id }}</p>
+    <table class="collapse" style="border: 1px solid black; border-collapse: collapse;">
+        <tr>
+            <th style="border: 1px solid black">Category:</th>
+            <td style="border: 1px solid black">{{ product.item_category }}</td>
+        </tr>
+        <tr>
+            <th style="border: 1px solid black">Product:</th>
+            <td style="border: 1px solid black">{{ product.title }}</td>
+        </tr>
+        <tr>
+            <th style="border: 1px solid black">Size:</th>
+            <td style="border: 1px solid black">{{ product.size }}</td>
+        </tr>
+        <tr>
+            <th style="border: 1px solid black">Price:</th>
+            <td style="border: 1px solid black">{{ product.unit_price }}</td>
+        </tr>
+    </table>
     <br>
 
 </div>
