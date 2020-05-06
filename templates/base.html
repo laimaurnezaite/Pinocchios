@@ -1,25 +1,61 @@
 <!-- templates/base.html -->
 <!DOCTYPE html>
+{% load static %}
 <html>
     <head>
         <meta charset="utf-8">
         <title>Pinocchio's Pizza & Subs</title> 
+        <link href="{% static 'bootstrap-4.4.1-dist/css/bootstrap.css' %}" rel="stylesheet">
+        <link href="{% static 'css/base.css' %}" rel="stylesheet">
     </head>
     <body> 
-        {% if user.is_authenticated %}
-            Hi {{ user.username }}!
-            <p><a href="{% url 'logout' %}">Log Out</a></p> 
-            <p><a href="{% url 'confirmed_orders' %}">Confirmed Orders</a></p>
-            <p><a href="{% url 'shopping_cart' %}">Shopping cart</a></p> 
-            <p><a href="{% url 'main_list' %}">Menu</a></p> 
-
-        {% else %}
-            <p>You are not logged in</p>
-            <a href="{% url 'login' %}">Log In</a> | <a href="{% url 'signup' %}">Sign Up</a>
-        {% endif %}
+        <div class="container" style="height:120px; border:1px solid black">
+            <div class="row" style="height:120px; ">
+                <div class="col-4" style="height: 99%; background-image: url({% static 'menu/pizza.png' %}); border-right:1px solid black;"></div>
+                <div class="col-4" style="height: 100%; text-align:center; margin:auto">
+                    <h3> Pinocchio's Pizza & Subs</h3>
+                    <p><img src="{% static 'menu/home-2x.png' %}"> 74 Winthrop StreetHarvard Square</p>
+                    <p><img src="{% static 'menu/phone-2x.png' %}"> 617-876-4897</p>
+                </div>
+                <div class="col-4" style="height: 99%; background-image: url({% static 'menu/pizza.png' %}); border-left:1px solid black;""></div>
+            </div>
+        </div>
+        <div class="container" style="height:100px; border:1px solid black">
+            <div class="row" style="height:100px; ">
+                <div class="col" style="text-align:left; margin:auto">
+                    <button type="button" id="menu" class="btn btn-outline-dark" onclick="location.href='{% url 'main_list' %}'">Menu</button>
+                    <button type="button" id="menu" class="btn btn-outline-dark" onclick="location.href='{% url 'shopping_cart' %}'">Cart</button>
+                    <button type="button" id="menu" class="btn btn-outline-dark" onclick="location.href='{% url 'confirmed_orders' %}'">Order History</button>
+                    <!-- <button type="button" id="menu" class="p-2 bd-highlight" onclick="location.href='{% url 'logout' %}'">Log Out </button> -->
+                </div>
+                {% if user.is_authenticated %}
+                    <div class="col-2" style="text-align:center; margin:auto"> 
+                        <button type="button" id="menu" class="btn btn-outline-dark" onclick="location.href='{% url 'logout' %}'">Log Out</button>
+                    </div>
+                {% else %}
+                    <div class="col-2" style="text-align:center; margin:auto"> 
+                        <button type="button" id="menu" class="btn btn-outline-dark" onclick="location.href='{% url 'login' %}'">Log In</button>
+                    </div>
+                    <div class="col-2" style="text-align:center; margin:auto"> 
+                        <button type="button" id="menu" class="btn btn-outline-dark" onclick="location.href='{% url 'signup' %}'">Sign Up</button>
+                    </div>
+                    {% endif %}
+            </div>
+        </div>
         <main>
             {% block content %}
             {% endblock content %} 
         </main>
     </body> 
+    <footer>
+        <div class="container" style="border:1px solid black;">
+            <div class="row" style="height: auto;">
+                <div class="col" style="text-align: center">
+                        <h6>Pinocchio's Pizza & Subs</h6>
+                        <p><img src="{% static 'menu/envelope-closed-2x.png' %}"> <a href="mailto:info@pinoccios.com">info@pinoccios.com</a></p>
+                        <p><img src="{% static 'menu/phone-2x.png' %}"> 617-876-4897</p>                    
+                </div>
+            </div>
+        </div>
+      </footer>
 </html>
