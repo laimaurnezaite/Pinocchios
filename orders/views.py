@@ -100,17 +100,22 @@ def add(request):
     
 def shopping_cart(request):
     # retrieve not confirmed orders
-    customer_id = get_customer_id(request)
-    customer = get_customer_object(request)
+    
     try:
+        customer_id = get_customer_id(request)
+        customer = get_customer_object(request)
+        print("TEST1")
+        print("TEST2")
         open_order = get_order(customer_id, False)
-
+        print("TEST3")
         context = {
                 'order':open_order,
                 'customer':customer,
                 }
+        print("TEST4")
         return render(request, 'shopping_cart.html', context) 
     except:
+        print("TEST5")
         context = {
             'message':"There are no items in shopping cart"
         }
@@ -135,13 +140,19 @@ def confirmOrder(request):
     return render(request, 'confirmed.html', context)
 
 def confirmed_orders(request):
-    # retrieve confirmed orders
-    customer_id = get_customer_id(request)
-    customer = get_customer_object(request)
-    confirmed_orders = filter_order(customer_id, True)
-    
-    context = {
-            'customer':customer,
-            'order':confirmed_orders,
+    try:
+        # retrieve confirmed orders
+        customer_id = get_customer_id(request)
+        customer = get_customer_object(request)
+        confirmed_orders = filter_order(customer_id, True)
+        
+        context = {
+                'customer':customer,
+                'order':confirmed_orders,
+            }
+        return render(request, 'confirmed.html', context)
+    except:
+        context = {
+            'message':"You need to be logged in to see order history."
         }
-    return render(request, 'confirmed.html', context)
+        return render(request, 'apology.html', context)
