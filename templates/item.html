@@ -2,45 +2,91 @@
 
 {% block content %}
 <div>
-    <table class="collapse" style="border: 1px solid black; border-collapse: collapse;">
-        <tr>
-            <th style="border: 1px solid black">Category:</th>
-            <td style="border: 1px solid black">{{ product.item_category }}</td>
-        </tr>
-        <tr>
-            <th style="border: 1px solid black">Product:</th>
-            <td style="border: 1px solid black">{{ product.title }}</td>
-        </tr>
-        <tr>
-            <th style="border: 1px solid black">Size:</th>
-            <td style="border: 1px solid black">{{ product.size }}</td>
-        </tr>
-        <tr>
-            <th style="border: 1px solid black">Price:</th>
-            <td style="border: 1px solid black">{{ product.unit_price }}</td>
-        </tr>
-    </table>
-    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col rounded" style="border: 1px solid black; text-align:center; margin:auto">
+                <p>Category:</p>
+            </div>
+            <div class="col-1"></div>
+            <div class="col rounded" style="border: 1px solid black; text-align:center;">
+                <p>{{ product.item_category }} </p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col rounded" style="border: 1px solid black; text-align:center; margin:auto">
+                <p>Product:</p>
+            </div>
+            <div class="col-1"></div>
+            <div class="col rounded" style="border: 1px solid black; text-align:center;">
+                <p>{{ product.title }} </p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col rounded" style="border: 1px solid black; text-align:center; margin:auto">
+                <p>Size:</p>
+            </div>
+            <div class="col-1"></div>
+            <div class="col rounded" style="border: 1px solid black; text-align:center;">
+                <p>{{ product.size }} </p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col rounded" style="border: 1px solid black; text-align:center; margin:auto">
+                <p>Price:</p>
+            </div>
+            <div class="col-1"></div>
+            <div class="col rounded" style="border: 1px solid black; text-align:center;">
+                <p>{{ product.unit_price }} </p>
+            </div>
+        </div>
+        <br>
 
+    </div>
 </div>
-<div>
+
     <form action="/orders/add/" method="POST" name="ordering">
         {% csrf_token %}
         {{ form.as_p}}
 
         {% if number_of_toppings > 0 %}
-            <label for="toppings">Add {{number_of_toppings}} toppings:</label><br>
-            {% for topping in toppings %}
-                <input class="single-checkbox" type="checkbox" name="toppings" id="toppings" value="{{topping.id}}">
-                <label for="toppings">{{topping.title}}</label><br>
-            {% endfor %}
+            <!-- <label for="toppings">Choose {{number_of_toppings}} toppings:</label><br> -->
+            <div class="container rounded" style="border: 1px solid black;">
+                <div class="row">
+                    <div class="col">
+                        <p>Choose {{number_of_toppings}} toppings:</p>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for topping in toppings %}
+                    <div class="col-2">
+                    <input class="single-checkbox" type="checkbox" name="toppings" id="toppings" value="{{topping.id}}">
+                    <label for="toppings">{{topping.title}}</label><br>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <br>
         {% endif %}
-        <input type="hidden" id="product" name="product" value="{{ product.id }}">
-        <label for="quantity">Quantity</label>
-        <input type="number" id="quantity" name="quantity" min="0" required><br>
-        <input type="submit" value="Add to order">
+        <div class="container rounded" style="border: 1px solid black;">
+            <div class="row">
+                <div class="col" style="padding: 1.5%;">
+                    <input type="hidden" id="product" name="product" value="{{ product.id }}">
+                    <label for="quantity">Count:</label>
+                    <input type="number" id="quantity" name="quantity" min="0" required>
+                    <input type="submit" value="Add to order">
+                </div>
+
+            </div>
+
+        </div>
+        
     </form>
 
+    </div>
+    <br>
 </div>
 {% endblock content %}
 
