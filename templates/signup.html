@@ -4,10 +4,43 @@
 {% block title %}Sign Up{% endblock title %}
 
 {% block content %} 
-    <h2>Sign Up</h2> 
+    <!-- <h2>Sign Up</h2> 
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Sign Up</button>
-    </form>
+    </form> -->
+
+
+
+
+    <div class="container rounded" style="border:1px solid black; margin:auto">
+        <div class="row" style="justify-content:center">
+                <form method="post" style="padding:2%; width:50%" class="font-weight-lighter">
+                    {% csrf_token %} 
+                    <!-- {{ form.as_p }} -->
+                    <label for="{{ form.username.id_for_label }}" class="col-md-4 control-label text-right">Username<span class="text-red"></span>:</label>
+                    {{ form.username }} <br>
+                    <label for="{{ form.email.id_for_label }}" class="col-md-4 control-label text-right">Email<span class="text-red"></span>:</label>
+                    {{ form.email }}  <br>
+                    <label for="{{ form.first_name.id_for_label }}" class="col-md-4 control-label text-right">First name:</label>
+                    {{ form.first_name }}  <br>
+                    <label for="{{ form.last_name.id_for_label }}" class="col-md-4 control-label text-right">Last name:</label>
+                    {{ form.last_name }}  <br>
+                    <label for="{{ form.city.id_for_label }}" class="col-md-4 control-label text-right">City:</label>
+                    {{ form.city }}  <br>
+                    <label for="{{ form.password1.id_for_label }}" class="col-md-4 control-label text-right">Password<span class="text-red"></span>:</label>
+                    {{ form.password1 }}  <br>
+                    <label for="{{ form.password2.id_for_label }}" class="col-md-4 control-label text-right">Confirm password:</label>
+                    {{ form.password2 }}  <br>
+                    
+                    <button type="submit" class="font-weight-lighter btn btn-outline-dark" style="width: 100%;">Sign Up</button> 
+                
+                </form>
+        </div>
+    </div>
+    <br>
+
+
+    
 {% endblock content %}
