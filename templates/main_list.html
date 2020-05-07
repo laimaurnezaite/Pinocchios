@@ -4,18 +4,42 @@
 
 {% block content %}
     {% for category in menu_categories %}
-        <table style="border: 1px black solid;">
-            <tr>
-                <th>{{category}}</th>
-            </tr>
-            {% for item in menu_items %}
-                {% if item.item_category == category %}
-                <tr>
-                    <td><a href="{% url 'item_detail' item.pk %}">{{item}} </a>  | {{item.size}} | {{item.unit_price}}</td>
-                </tr>
-                {% endif %}
-            {% endfor %}
-        </table>
+        <div class="container">
+            <div class="row justify-content-around" style="border: 1px solid black;">
+                <div class="col-5" style=" text-align:center; margin:auto">
+                    <h4 class="text-monospace">{{category}}</h4>
+                    {% if category == "Regular Pizza" %}
+                        <p class="font-weight-lighter">Our Regular pizza is a thin-crust or Neapolitan pizza. They come in 2 sizes: small (12" in diameter) and large (16" in diameter). The small is suitable for 1 to 2 people while the large feeds 2 to 4 people.</p>
+                        <p class="font-weight-lighter">Special Pizza - pick different 5 toppings!</p>
+
+                    {% elif category == "Sicilian Pizza" %}
+                    
+                        <p class="font-weight-lighter" >Our Sicilian pizza is a deep-dish or thick-crust pizza. We sell them in a 9-slice or a 15-slice size.
+                        <br>The 9-slice size is 16" x 16" and will feed anywhere from 3 to 5 people.
+                        <br>The 15-slice size is 28" x 16", comes in 2 large pizza boxes and can feed 6 to 9 people.</p>
+                        <p class="font-weight-lighter" >Special Pizza - pick 5 different toppings!</p>
+                    {% elif category == "Subs" %}
+                        <p class="font-weight-lighter" >Try out our  sandwiches made on a long bun. <br>Choose our favourites or add some mushrooms, green pepper, onions or Extra cheese on any sub!</p>
+                    {% elif category == "Pasta" %}
+                        <p class="font-weight-lighter" >Our delicous classic Italian American comfort food - pasta with Neapolitan-style tomato-based sauce with meat, cheese or chicken. So YUMMY! </p>
+                    {% elif category == "Dinner Platters" %}
+                        <p class="font-weight-lighter" >Main dish served on a platter with one or more side dishes, such as a salad or french fries.</p>
+                    {% elif category == "Salads" %}
+                        <p class="font-weight-lighter" >Vegetables are not only healthy and nutritious but also tasty! Get daily portion straight from garden, try Greek style and salads with Tuna or combine with meat and cheese.</p>
+                    {% endif %}
+                </div>
+                <div class="col-5" style="text-align:justify; padding:1%">
+                        
+                    {% for item in menu_items %}
+                        {% if item.item_category == category %}
+                            <div style="text-align:center; padding:1%">
+                                <a href="{% url 'item_detail' item.pk %}" class="text-dark" >{{item}}     |     {{item.size}}     |     ${{item.unit_price}}</a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
         <br>
     {% endfor %}
         
