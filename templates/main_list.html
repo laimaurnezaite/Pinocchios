@@ -33,7 +33,7 @@
                     {% for item in menu_items %}
                         {% if item.item_category == category %}
                             <div style="text-align:center; padding:1%">
-                                <a href="{% url 'item_detail' item.pk %}" class="text-dark" >{{item}}     |     {{item.size}}     |     ${{item.unit_price}}</a>
+                                <a class="font-weight-lighter" style="color: black;" href="{% url 'item_detail' item.pk %}" class="text-dark" >{{item}}     |     {{item.size}}     |     ${{item.unit_price}}</a>
                             </div>
                         {% endif %}
                     {% endfor %}
