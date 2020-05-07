@@ -1,59 +1,81 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div>
-    {% for data in customer %}
-        <p>Customer id: {{data.id}} </p>
-        <p>Customer username: {{data.username}} </p>
-        <p>Customer email: {{data.email}} </p>
-        <p>Order ID: {{order.id}}</p>
-        <td>Order date: {{order.date}}</td>
-    {% endfor %}
+    <div class="container" style="border 1px solid">
+        <div class="row" style="border 1px solid">
+            <table class="table" style="border: 1px solid black;">
+                <thead class="thead-light">
+                <tr>
+                    <th style="border: 1px solid black" scope="col">Customer ID:</th>
+                    <th scope="col" style="border: 1px solid black">Customer</th>
+                    <th scope="col" style="border: 1px solid black">Email</th>
+                    <th scope="col" style="border: 1px solid black">Order ID</th>
+                    <th scope="col" style="border: 1px solid black">Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for customer in customer %}
+                    <tr>
+                        <td class="font-weight-lighter" scope="row" style="border: 1px solid black">{{customer.id}}</td>
+                        <td class="font-weight-lighter" style="border: 1px solid black">{{customer.username}}</td>
+                        <td class="font-weight-lighter" style="border: 1px solid black">{{customer.email}}</td>
+                        <td class="font-weight-lighter" style="border: 1px solid black">{{order.id}}</td>
+                        <td class="font-weight-lighter" style="border: 1px solid black">{{order.date}}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <table style="border:solid 1px black">
-        <tr>
-            <th>Product ID</th>
-            <th>Product</th>
-            <th>Product category</th>
-            <th>Size</th>
-            <th>Unit Price</th>
-            <th>Quantity</th>
-            <th>Toppings</th>
-            <th>Sum</th>
-        </tr>
-        {% for item in order.items %}
-            <tr>
-                <td>{{item.product_id}} </td>
-                <td>{{item.product_title}}</td>
-                <td>{{item.category}}</td>
-                <td>{{item.size}}</td>
-                <td>{{item.price}}</td>
-                <td>{{item.quantity}}</td>
-                <td>{{item.toppings}}</td>
-                <td>{{item.sum}}</td>
-            </tr>
-        {% endfor %}
-        <tr>
-        </tr>
-        <tr>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <th>Total</th>
-            <td>{{order.total}}</td>
-        </tr>
-    </table>
-    
-        <form action=" {% url 'confirm' %}" method="POST">
-            {% csrf_token %}
-            <input type="hidden" id="order_id" name="order_id" value="{{ order.id }}">
-            <input type="submit" value="Confirm order"> 
-        </form>
-        
-</div>
-
+    <div class="container">
+        <div class="row">
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col" style="border: 1px solid black">Product category</th>
+                    <th scope="col" style="border: 1px solid black">Product</th>
+                    <th scope="col" style="border: 1px solid black">Product ID</th>
+                    <th scope="col" style="border: 1px solid black">Size</th>
+                    <th scope="col" style="border: 1px solid black">Unit Price</th>
+                    <th scope="col" style="border: 1px solid black">Quantity</th>
+                    <th scope="col" style="border: 1px solid black">Toppings</th>
+                    <th scope="col" style="border: 1px solid black">Sum</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for item in order.items %}
+                    <tr>
+                        <td class="font-weight-lighter" scope="row" style="border: 1px solid black">{{item.category}}</td>
+                        <td class="font-weight-lighter" style="border: 1px solid black">{{item.product_title}}</td>
+                        <td class="font-weight-lighter" style="border: 1px solid black">{{item.product_id}}</td>
+                        <td class="font-weight-lighter" style="border: 1px solid black">{{item.size}}</td>
+                        <td class="font-weight-lighter" style="border: 1px solid black">${{item.price}}</td>
+                        <td class="font-weight-lighter" style="border: 1px solid black">{{item.quantity}}</td>
+                        <td class="font-weight-lighter" style="border: 1px solid black">
+                            {% for x in item.toppings %}
+                                {{x}},
+                            {% endfor%}
+                        </td>
+                        <td class="font-weight-lighter" style="border: 1px solid black">${{item.sum}}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan="7" style="text-align: end; border: 1px solid black">Total:</th>
+                        <td style="border: 1px solid black" >${{order.total}}</td>
+                    </tr>
+                    <tr>
+                        <th colspan="8" style="text-align: end;">
+                            <form action=" {% url 'confirm' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" id="order_id" name="order_id" value="{{ order.id }}">
+                                <button type="submit" class="btn btn-outline-dark">Confirm order</button>
+                            </form>
+                        </th> 
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>  
+    <br>
 {% endblock content %}
