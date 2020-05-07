@@ -1,57 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- <div>
-    <div class="container">
-        <div class="row">
-            <div class="col rounded" style="border: 1px solid black; text-align:center; margin:auto">
-                <p class="font-weight-lighter">Category:</p>
-            </div>
-            <div class="col-1"></div>
-            <div class="col rounded" style="border: 1px solid black; text-align:center;">
-                <p class="font-weight-lighter">{{ product.item_category }} </p>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col rounded" style="border: 1px solid black; text-align:center; margin:auto">
-                <p>Product:</p>
-            </div>
-            <div class="col-1"></div>
-            <div class="col rounded" style="border: 1px solid black; text-align:center;">
-                <p class="font-weight-lighter">{{ product.title }} </p>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col rounded" style="border: 1px solid black; text-align:center; margin:auto">
-                <p class="font-weight-lighter">Size:</p>
-            </div>
-            <div class="col-1"></div>
-            <div class="col rounded" style="border: 1px solid black; text-align:center;">
-                <p class="font-weight-lighter">{{ product.size }} </p>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col rounded" style="border: 1px solid black; text-align:center; margin:auto">
-                <p class="font-weight-lighter">Price:</p>
-            </div>
-            <div class="col-1"></div>
-            <div class="col rounded" style="border: 1px solid black; text-align:center;">
-                <p class="font-weight-lighter">{{ product.unit_price }} </p>
-            </div>
-        </div>
-        <br>
 
-    </div>
-</div> -->
 <div class="container" style="border 1px solid">
     <div class="row" style="border 1px solid">
         <table class="table" style="border: 1px solid black;">
             <thead class="thead-light">
             <tr>
-                <th  style="border: 1px solid black" scope="col">Category</th>
+                <th style="border: 1px solid black" scope="col">Category</th>
                 <th scope="col" style="border: 1px solid black">Product</th>
                 <th scope="col" style="border: 1px solid black">Size</th>
                 <th scope="col" style="border: 1px solid black">Price</th>
@@ -69,14 +25,11 @@
     </div>
 </div>
   
-
-
     <form action="/orders/add/" method="POST" name="ordering">
         {% csrf_token %}
         {{ form.as_p}}
 
         {% if number_of_toppings > 0 %}
-            <!-- <label for="toppings">Choose {{number_of_toppings}} toppings:</label><br> -->
             <div class="container rounded" style="border: 1px solid black;">
                 <div class="row">
                     <div class="col">
