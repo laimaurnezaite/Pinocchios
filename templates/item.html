@@ -47,18 +47,27 @@
             </div>
             <br>
         {% endif %}
-        <div class="container rounded" style="border: 1px solid black;">
-            <div class="row">
-                <div class="col" style="padding: 1.5%;">
-                    <input type="hidden" id="product" name="product" value="{{ product.id }}">
-                    <label class="font-weight-lighter" for="quantity">Count:</label>
-                    <input type="number" id="quantity" name="quantity" min="0" required>
-                    <input class="font-weight-lighter" type="submit" value="Add to order">
+        
+        {% if user.is_authenticated %}
+            <div class="container rounded" style="border: 1px solid black;">
+                <div class="row">
+                    <div class="col" style="padding: 1.5%;">
+                        <input type="hidden" id="product" name="product" value="{{ product.id }}">
+                        <label class="font-weight-lighter" for="quantity">Count:</label>
+                        <input type="number" id="quantity" name="quantity" min="0" required>
+                        <input class="font-weight-lighter" type="submit" value="Add to order">
+                    </div>
                 </div>
-
             </div>
-
-        </div>
+        {% else %}
+            <div class="container rounded" style="border: 1px solid black;">
+                <div class="row">
+                    <div class="col" style="padding: 1.5%;">
+                        <p class="font-weight-lighter">You need to be logged in to make order.</p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         
     </form>
 
