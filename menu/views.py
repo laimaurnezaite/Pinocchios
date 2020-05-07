@@ -29,8 +29,11 @@ def menu_item(request, pk):
     if product.number_of_toppings > 0:
         if product.item_category == "Regular Pizza" or product.item_category == "Sicilian Pizza":
             toppings = Toppings.objects.filter(item_category="Pizza")
-        else:
+        elif product.item_category == "Subs":
             toppings = Toppings.objects.filter(item_category="Subs")
+        elif product.item_category == "Desserts":
+            toppings = Toppings.objects.filter(item_category="Desserts")
+        
     
     number_of_toppings = product.number_of_toppings
     context = {
