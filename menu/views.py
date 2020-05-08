@@ -7,7 +7,7 @@ from .models import Product, Toppings
 
 # Create your views here.
 
-def menu_list(request):
+def home(request):
     menu_items = Product.objects.all()
     menu_categories = []
     for item in menu_items:
