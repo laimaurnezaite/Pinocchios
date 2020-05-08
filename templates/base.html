@@ -30,7 +30,8 @@
                     <!-- <button type="button" id="menu" class="p-2 bd-highlight" onclick="location.href='{% url 'logout' %}'">Log Out </button> -->
                 </div>
                 {% if user.is_authenticated %}
-                    <div class="col-2" style="text-align:center; margin:auto"> 
+                    <div class="col-4" style="text-align:center; margin:auto"> 
+                        <button type="button" style="width: 45%;" id="menu" class="btn btn-outline-dark" onclick="location.href='{% url 'password_change' %}'">Change Password</button>
                         <button type="button" id="menu" class="btn btn-outline-dark" onclick="location.href='{% url 'logout' %}'">Log Out</button>
                     </div>
                 {% else %}
