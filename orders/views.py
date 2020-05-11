@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, DetailView
 
@@ -6,6 +6,23 @@ from django.contrib.auth import get_user_model
 from .models import Order#, ShoppingCart
 from menu.models import Product, Toppings
 from users.models import CustomUser
+
+from django.core.mail import BadHeaderError, send_mail
+
+def send_email(order_to_confirm, customer):
+    for data in customer:
+        customer_email = data.email
+    
+    subject = "Order confirmation"
+    message = f'Your order no. {order_to_confirm.id} was confirmed. We will message you whenever it is ready to pick up. Oh, and always remember: Eat More Pizza!'
+    from_email = 'laima.urnezaite@gmail.com'
+    if subject and message and from_email:
+        send_mail(subject, message, from_email, [f'{customer_email}'])
+    else:
+        context = {
+            'message':"Confirmation email was not sent."
+        }
+        return render(request, 'apology.html', context)
 
 # helper functions
 
@@ -136,6 +153,9 @@ def confirmOrder(request):
                 'customer':customer,
                 'order':confirmed_orders,
             }
+        
+        send_email(order_to_confirm, customer)
+
     return render(request, 'confirmed.html', context)
 
 def confirmed_orders(request):
