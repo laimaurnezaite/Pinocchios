@@ -4,21 +4,21 @@
 
 <div class="container">
     <div class="row">
-        <table class="table" style="border: 1px solid black;">
+        <table class="table">
             <thead class="thead-light">
             <tr>
-                <th style="border: 1px solid black" scope="col">Category</th>
-                <th scope="col" style="border: 1px solid black">Product</th>
-                <th scope="col" style="border: 1px solid black">Size</th>
-                <th scope="col" style="border: 1px solid black">Price</th>
+                <th scope="col">Category</th>
+                <th scope="col">Product</th>
+                <th scope="col">Size</th>
+                <th scope="col">Price</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td class="font-weight-lighter" scope="row" style="border: 1px solid black">{{ product.item_category }}</td>
-                <td class="font-weight-lighter" style="border: 1px solid black">{{ product.title }}</td>
-                <td class="font-weight-lighter" style="border: 1px solid black">{{ product.size }}</td>
-                <td class="font-weight-lighter" style="border: 1px solid black">${{ product.unit_price }}</td>
+                <td class="font-weight-lighter" scope="row">{{ product.item_category }}</td>
+                <td class="font-weight-lighter">{{ product.title }}</td>
+                <td class="font-weight-lighter">{{ product.size }}</td>
+                <td class="font-weight-lighter">${{ product.unit_price }}</td>
             </tr>
             </tbody>
         </table>
@@ -30,15 +30,15 @@
         {{ form.as_p}}
 
         {% if number_of_toppings > 0 %}
-            <div class="container rounded" style="border: 1px solid black;">
+            <div class="container rounded" id="ToppingsContainer">
                 <div class="row">
                     <div class="col">
-                        <p class="font-weight-lighter">Choose {{number_of_toppings}} toppings:</p>
+                        <p class="font-weight-lighter">Choose up to {{number_of_toppings}} toppings:</p>
                     </div>
                 </div>
                 <div class="row">
                     {% for topping in toppings %}
-                    <div class="col-2">
+                    <div class="col-3">
                     <input class="single-checkbox" type="checkbox" name="toppings" id="toppings" value="{{topping.id}}">
                     <label class="font-weight-lighter" for="toppings">{{topping.title}}</label><br>
                     </div>
@@ -49,9 +49,9 @@
         {% endif %}
         
         {% if user.is_authenticated %}
-            <div class="container rounded" style="border: 1px solid black;">
+            <div class="container rounded" id="CountContainer">
                 <div class="row">
-                    <div class="col" style="padding: 1.5%;">
+                    <div class="col" id="CountCol">
                         <input type="hidden" id="product" name="product" value="{{ product.id }}">
                         <label class="font-weight-lighter" for="quantity">Count:</label>
                         <input type="number" id="quantity" name="quantity" min="0" required>
@@ -60,9 +60,9 @@
                 </div>
             </div>
         {% else %}
-            <div class="container rounded" style="border: 1px solid black;">
+            <div class="container rounded" id="NeedToBeLoggedContainer">
                 <div class="row">
-                    <div class="col" style="padding: 1.5%;">
+                    <div class="col" id="NeedToBeLoggedCol">
                         <p class="font-weight-lighter">You need to be logged in to make order.</p>
                     </div>
                 </div>

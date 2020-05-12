@@ -9,37 +9,39 @@
         <link href="{% static 'css/base.css' %}" rel="stylesheet">
     </head>
     <body> 
-        <div class="container" style="height:120px; ">
-            <div class="row rounded" style="height:120px; border:1px solid black ">
-                <div class="col-4" style="height: 99%; background-image: url({% static 'menu/pizza.png' %}); border-right:1px solid black;"></div>
-                <div class="col-4" style="height: 100%; text-align:center; margin:auto">
+        <div class="container" id="headerContainer">
+            <div class="row rounded" id="headerRow">
+                <div class="col-4" id="headerBlock1"></div>
+                <div class="col-4" id="headerBlock2">
                     <h3> Pinocchio's Pizza & Subs</h3>
                     <p><img src="{% static 'menu/home-2x.png' %}"> 74 Winthrop StreetHarvard Square</p>
                     <p><img src="{% static 'menu/phone-2x.png' %}"> 617-876-4897</p>
                 </div>
-                <div class="col-4" style="height: 99%; background-image: url({% static 'menu/pizza.png' %}); border-left:1px solid black;""></div>
+                <div class="col-4" id="headerBlock3"></div>
             </div>
         </div>
         <br>
-        <div class="container rounded" style="height:100px; border:1px solid black">
-            <div class="row" style="height:100px; ">
-                <div class="col" style="text-align:left; margin:auto">
-                    <button type="button" id="menu" class="btn btn-outline-dark" onclick="location.href='{% url 'home' %}'">Menu</button>
-                    <button type="button" id="menu" class="btn btn-outline-dark" onclick="location.href='{% url 'shopping_cart' %}'">Cart</button>
-                    <button type="button" id="menu" class="btn btn-outline-dark" onclick="location.href='{% url 'confirmed_orders' %}'">Order History</button>
-                    <!-- <button type="button" id="menu" class="p-2 bd-highlight" onclick="location.href='{% url 'logout' %}'">Log Out </button> -->
+         <div class="container rounded" id="menuContainer">
+            <div class="row" id="menuRow">
+                <div class="col" id="menuButtonsColumn">
+                    <button type="button" class="btn btn-outline-dark font-weight-lighter" onclick="location.href='{% url 'home' %}'">Menu</button>
+                    <button type="button" class="btn btn-outline-dark font-weight-lighter" onclick="location.href='{% url 'shopping_cart' %}'">Cart</button>
+                    <button type="button" class="btn btn-outline-dark font-weight-lighter" onclick="location.href='{% url 'confirmed_orders' %}'">Order History</button>
                 </div>
                 {% if user.is_authenticated %}
-                    <div class="col-4" style="text-align:center; margin:auto"> 
-                        <button type="button" style="width: 45%;" id="menu" class="btn btn-outline-dark" onclick="location.href='{% url 'password_change' %}'">Change Password</button>
-                        <button type="button" id="menu" class="btn btn-outline-dark" onclick="location.href='{% url 'logout' %}'">Log Out</button>
+                    <div class="col-2" id="PasswordChangeButtonCol"> 
+                        <button type="button" id="PasswordChangeButton" class="btn btn-outline-dark font-weight-lighter" onclick="location.href='{% url 'password_change' %}'">Change Password</button>
                     </div>
+                    <div class="col-2" id="LogOutButtonCol"> 
+                        <button type="button" class="btn btn-outline-dark font-weight-lighter" onclick="location.href='{% url 'logout' %}'">Log Out</button>
+                    </div>
+
                 {% else %}
-                    <div class="col-2" style="text-align:center; margin:auto"> 
-                        <button type="button" id="menu" class="btn btn-outline-dark" onclick="location.href='{% url 'login' %}'">Log In</button>
+                    <div class="col-2" id="LoginButtonCol"> 
+                        <button type="button" class="btn btn-outline-dark font-weight-lighter" onclick="location.href='{% url 'login' %}'">Log In</button>
                     </div>
-                    <div class="col-2" style="text-align:center; margin:auto"> 
-                        <button type="button" id="menu" class="btn btn-outline-dark" onclick="location.href='{% url 'signup' %}'">Sign Up</button>
+                    <div class="col-2" id="SignUpButtonCol"> 
+                        <button type="button" class="btn btn-outline-dark font-weight-lighter" onclick="location.href='{% url 'signup' %}'">Sign Up</button>
                     </div>
                     {% endif %}
             </div>
@@ -51,14 +53,14 @@
         </main>
     </body> 
     <footer>
-        <div class="container rounded" style="border:1px solid black;">
+        <div class="container rounded" id="FooterContainer">
             <div class="row">
-                <div class="col" style="text-align: center;">
-                    <p class="font-weight-lighter" style="font-size: 19px;" >Oh, and always remember:<br>Eat More Pizza!</p>
+                <div class="col" id="FooterCol1">
+                    <p class="font-weight-lighter">Oh, and always remember:<br>Eat More Pizza!</p>
                 </div>
             </div>
-            <div class="row" style="height: auto;">
-                <div class="col" style="text-align: center">
+            <div class="row" >
+                <div class="col" id="FooterCol2">
                         <h6 class="font-weight-lighter" >Pinocchio's Pizza & Subs</h6>
                         <p class="font-weight-lighter"><img src="{% static 'menu/envelope-closed-2x.png' %}"> <a href="mailto:info@pinoccios.com">info@pinoccios.com</a></p>
                         <p class="font-weight-lighter"><img src="{% static 'menu/phone-2x.png' %}"> 617-876-4897</p>                    

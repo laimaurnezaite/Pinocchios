@@ -4,13 +4,13 @@
 {% block title %}Log In{% endblock title %}
 
 {% block content %} 
-    <div class="container rounded" style="border:1px solid black; margin:auto">
-        <div class="row" style="justify-content:center">
-                <form method="post" style="justify-content:center; text-align:center; padding:2%">
+    <div class="container rounded" id="LoginPageContainer">
+        <div class="row" id="LoginPageRow">
+                <form method="post" id="LoginPageForm">
                     {% csrf_token %} 
                     {{ form.as_p }}
-                    <button type="submit" class="font-weight-lighter btn btn-outline-dark" style="width: 100%;">Log In</button> 
-                    <button type="button" class="font-weight-lighter btn btn-outline-dark" style="width: 100%;" onclick="location.href='{% url 'password_reset' %}'">Forgot your password?</button>
+                    <button type="submit" id="LoginPageLoginButton" class="font-weight-lighter btn btn-outline-dark">Log In</button> 
+                    <button type="button" id="LoginPageForgotPasswordButton" class="font-weight-lighter btn btn-outline-dark" onclick="location.href='{% url 'password_reset' %}'">Forgot your password?</button>
                 </form>
         </div>
     </div>

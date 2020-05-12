@@ -14,9 +14,9 @@
 
 
 
-    <div class="container rounded" style="border:1px solid black; margin:auto">
-        <div class="row" style="justify-content:center">
-                <form method="post" style="padding:2%; width:50%" class="font-weight-lighter">
+    <div class="container rounded" id="SignUpContainer">
+        <div class="row" id="SignUpRow">
+                <form method="post" id="SignUpForm" class="font-weight-lighter">
                     {% csrf_token %} 
                     <!-- {{ form.as_p }} -->
                     <label for="{{ form.username.id_for_label }}" class="col-md-4 control-label text-right">Username<span class="text-red"></span>:</label>
@@ -34,7 +34,7 @@
                     <label for="{{ form.password2.id_for_label }}" class="col-md-4 control-label text-right">Confirm password:</label>
                     {{ form.password2 }}  <br>
                     
-                    <button type="submit" class="font-weight-lighter btn btn-outline-dark" style="width: 100%;">Sign Up</button> 
+                    <button type="submit" class="font-weight-lighter btn btn-outline-dark" id="SignUpButton">Sign Up</button> 
                 
                 </form>
         </div>

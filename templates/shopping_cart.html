@@ -1,26 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container" style="border 1px solid">
-        <div class="row" style="border 1px solid">
-            <table class="table" style="border: 1px solid black;">
+    <div class="container">
+        <div class="row">
+            <table class="table">
                 <thead class="thead-light">
                 <tr>
-                    <th style="border: 1px solid black" scope="col">Customer ID:</th>
-                    <th scope="col" style="border: 1px solid black">Customer</th>
-                    <th scope="col" style="border: 1px solid black">Email</th>
-                    <th scope="col" style="border: 1px solid black">Order ID</th>
-                    <th scope="col" style="border: 1px solid black">Date</th>
+                    <th scope="col">Customer ID:</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Date</th>
                 </tr>
                 </thead>
                 <tbody>
                     {% for customer in customer %}
                     <tr>
-                        <td class="font-weight-lighter" scope="row" style="border: 1px solid black">{{customer.id}}</td>
-                        <td class="font-weight-lighter" style="border: 1px solid black">{{customer.username}}</td>
-                        <td class="font-weight-lighter" style="border: 1px solid black">{{customer.email}}</td>
-                        <td class="font-weight-lighter" style="border: 1px solid black">{{order.id}}</td>
-                        <td class="font-weight-lighter" style="border: 1px solid black">{{order.date}}</td>
+                        <td class="font-weight-lighter" scope="row">{{customer.id}}</td>
+                        <td class="font-weight-lighter">{{customer.username}}</td>
+                        <td class="font-weight-lighter">{{customer.email}}</td>
+                        <td class="font-weight-lighter">{{order.id}}</td>
+                        <td class="font-weight-lighter">{{order.date}}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -33,39 +33,39 @@
             <table class="table">
                 <thead class="thead-light">
                 <tr>
-                    <th scope="col" style="border: 1px solid black">Product category</th>
-                    <th scope="col" style="border: 1px solid black">Product</th>
-                    <th scope="col" style="border: 1px solid black">Product ID</th>
-                    <th scope="col" style="border: 1px solid black">Size</th>
-                    <th scope="col" style="border: 1px solid black">Unit Price</th>
-                    <th scope="col" style="border: 1px solid black">Quantity</th>
-                    <th scope="col" style="border: 1px solid black">Toppings</th>
-                    <th scope="col" style="border: 1px solid black">Sum</th>
+                    <th scope="col">Product category</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Product ID</th>
+                    <th scope="col">Size</th>
+                    <th scope="col">Unit Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Toppings</th>
+                    <th scope="col">Sum</th>
                 </tr>
                 </thead>
                 <tbody>
                     {% for item in order.items %}
                     <tr>
-                        <td class="font-weight-lighter" scope="row" style="border: 1px solid black">{{item.category}}</td>
-                        <td class="font-weight-lighter" style="border: 1px solid black">{{item.product_title}}</td>
-                        <td class="font-weight-lighter" style="border: 1px solid black">{{item.product_id}}</td>
-                        <td class="font-weight-lighter" style="border: 1px solid black">{{item.size}}</td>
-                        <td class="font-weight-lighter" style="border: 1px solid black">${{item.price}}</td>
-                        <td class="font-weight-lighter" style="border: 1px solid black">{{item.quantity}}</td>
-                        <td class="font-weight-lighter" style="border: 1px solid black">
+                        <td class="font-weight-lighter" scope="row">{{item.category}}</td>
+                        <td class="font-weight-lighter">{{item.product_title}}</td>
+                        <td class="font-weight-lighter">{{item.product_id}}</td>
+                        <td class="font-weight-lighter">{{item.size}}</td>
+                        <td class="font-weight-lighter">${{item.price}}</td>
+                        <td class="font-weight-lighter">{{item.quantity}}</td>
+                        <td class="font-weight-lighter">
                             {% for x in item.toppings %}
                                 {{x}},
                             {% endfor%}
                         </td>
-                        <td class="font-weight-lighter" style="border: 1px solid black">${{item.sum}}</td>
+                        <td class="font-weight-lighter">${{item.sum}}</td>
                     </tr>
                     {% endfor %}
                     <tr>
-                        <th colspan="7" style="text-align: end; border: 1px solid black">Total:</th>
-                        <td style="border: 1px solid black" >${{order.total}}</td>
+                        <th colspan="7" class="TableTotalSum">Total:</th>
+                        <td>${{order.total}}</td>
                     </tr>
                     <tr>
-                        <th colspan="8" style="text-align: end;">
+                        <th colspan="8" id="ConfirmOrderTh">
                             <form action=" {% url 'confirm' %}" method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" id="order_id" name="order_id" value="{{ order.id }}">
